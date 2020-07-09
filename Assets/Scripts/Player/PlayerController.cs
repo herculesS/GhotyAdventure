@@ -1,98 +1,82 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : StateMachine
 {
+
+    [SerializeField]
+    private GameObject projectile;
+    [SerializeField]
+    private GameObject inputManagerObject;
+    private InputManager _inputManager;
     private Health _playerHealth;
     private Damage _playerDamage;
     private TakeDamage _takeDamage;
-    private Vector3 _touchPosition;
-
-    public Vector3 TouchPosition { get { return _touchPosition; } }
-
+    private float _currentShootDelay = 0f;
+    private float _shootDelay = 4f;
+    private float _shootDirection = 1f;
+    public delegate void OnPlayerShot();
+    public event OnPlayerShot OnPlayerShotEvent;
+    public Damage PlayerDamage { get => _playerDamage; set => _playerDamage = value; }
+    public GameObject Projectile { get => projectile; set => projectile = value; }
+    public float CurrentShootDelay { get => _currentShootDelay; set => _currentShootDelay = value; }
+    public float ShootDirection { get => _shootDirection; set => _shootDirection = value; }
     protected override void Awake()
     {
         base.Awake();
         _playerHealth = GetComponent<Health>();
         _playerDamage = GetComponent<Damage>();
         _takeDamage = GetComponent<TakeDamage>();
+        _inputManager = inputManagerObject.GetComponent<InputManager>();
     }
-
     void Start()
     {
-        SetState(new PlayerIdleState(this));
-        if (_playerHealth != null)
-        {
-            _playerHealth.Initialize(4f);
-        }
+        InitializeStateMachine(new PlayerIdleState(this));
+        _playerHealth.Initialize(4f);
+        _playerDamage.Value = 10f;
 
-        if (_playerDamage != null)
-        {
-            _playerDamage.Value = 10f;
-        }
-        //InvokeRepeating("debugHealth", 2f, 0.3f);
     }
-
     protected override void Update()
     {
-        if (TouchHappened())
-            HandleTouch();
+        if (ShouldMove)
+            SetState(new PlayerMovingState(this, InputManager.GetPointerPosition()));
 
+        if (ShouldShoot)
+            Shoot();
+
+        UpdateShootDelay();
         base.Update();
     }
 
-    private void HandleTouch()
-    {
-        if (Input.touchCount > 0)
-        {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began)
-            {
-                _touchPosition = Camera.main.ScreenToWorldPoint(_touch.position);
-                _touchPosition.z = 0;
-            }
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            _touchPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            _touchPosition.z = 0;
-        }
-        SetState(new PlayerMovingState(this));
-    }
+    private bool ShouldShoot => _currentShootDelay <= 0 && InputManager.IsFireKeyPressed();
+    private bool ShouldMove => InputManager.PointerInputHappened() && !(_state is PlayerShootState);
 
-    private bool TouchHappened()
+
+    public void Shoot()
     {
-        if (IsPointerOverGameObject() || Input.touchCount == 0 || !Input.GetMouseButtonDown(0))
+        _currentShootDelay = _shootDelay;
+        if (OnPlayerShotEvent != null) OnPlayerShotEvent();
+        SetState(new PlayerShootState(this));
+    }
+    private void UpdateShootDelay()
+    {
+        if (_currentShootDelay > 0f)
         {
-            return false;
+            _currentShootDelay -= Time.deltaTime;
         }
-        return true;
     }
-    public static bool IsPointerOverGameObject()
-    {
-        if (EventSystem.current.IsPointerOverGameObject())
-            return true;
-
-        if (Input.touchCount > 0 && Input.touches[0].phase == TouchPhase.Began)
-        {
-            if (EventSystem.current.IsPointerOverGameObject(Input.touches[0].fingerId))
-                return true;
-        }
-
-        return false;
-    }
-    public void debugHealth()
-    {
-        Debug.Log("Player health: " + _playerHealth.CurrentHealth);
-    }
-
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Enemy")
             _takeDamage.takeDamage(.25f);
     }
+    public void UpdateMovementDirection()
+    {
+        _shootDirection = (Rigidbody.velocity.x >= 0) ? 1f : -1f;
+    }
 
-
+    public int Layer => gameObject.layer;
 
 }

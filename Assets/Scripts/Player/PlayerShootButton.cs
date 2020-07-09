@@ -5,34 +5,30 @@ using UnityEngine.UI;
 
 public class PlayerShootButton : MonoBehaviour
 {
-    PlayerShoot _playerShoot;
-
+    PlayerController _playerController;
     Text _FireButtonText;
-
     private void Awake()
     {
         _FireButtonText = GetComponent<Text>();
-        _playerShoot = GameObject.FindWithTag("Player").GetComponent<PlayerShoot>();
+        _playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
-
     void Start()
     {
-        _playerShoot.OnPlayerShotEvent += OnPlayerShot;
+        _playerController.OnPlayerShotEvent += OnPlayerShot;
     }
     void OnPlayerShot()
     {
-        _FireButtonText.text = _playerShoot.CurrentShootDelay.ToString("0.00");
+        _FireButtonText.text = _playerController.CurrentShootDelay.ToString("0.00");
     }
-    // Update is called once per frame
     void Update()
     {
-        if (_playerShoot.CurrentShootDelay <= 0f)
+        if (_playerController.CurrentShootDelay <= 0f)
         {
             _FireButtonText.text = "Fire";
         }
         else
         {
-            _FireButtonText.text = _playerShoot.CurrentShootDelay.ToString("0.00");
+            _FireButtonText.text = _playerController.CurrentShootDelay.ToString("0.00");
         }
     }
 }

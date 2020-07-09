@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class SkullEnemyManager : EnemyManager
 {
-
-    // Use this for initialization
     void Start()
     {
         _health.Initialize(1f);
+        InitializeStateMachine(new FigureEightMoveState(this));
+        var duration = Random.Range(5f, 7f);
+        Invoke(nameof(RandomShoot), duration);
     }
-
-    // Update is called once per frame
-    void Update()
+    void RandomShoot()
     {
+        var duration = Random.Range(5f, 7f);
+        Invoke(nameof(RandomShoot), duration);
+        if (IsPaused) return;
+        SetState(new SkullEnemyShootState(this));
 
     }
+
 }

@@ -5,13 +5,13 @@ using UnityEngine;
 public class CameraMovement : MonoBehaviour
 {
     public Transform followTarget;
-    public float minX, maxX;
+    public float minX, maxX, minY, maxY;
+    private float XComp => Mathf.Clamp(followTarget.position.x, minX, maxX);
+    private float YComp => Mathf.Clamp(followTarget.position.y, minY, maxY);
+    private Vector3 DesiredPosition => new Vector3(XComp, YComp, -10f);
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        Vector3 desiredPos = new Vector3(Mathf.Clamp(followTarget.position.x, minX, maxX), transform.position.y, -10);
-
-        transform.position = Vector3.Lerp(transform.position, desiredPos, 10f * Time.deltaTime);
+        transform.position = Vector3.Lerp(transform.position, DesiredPosition, 5f * Time.deltaTime);
     }
 }

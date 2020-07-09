@@ -13,14 +13,10 @@ public class GameOver : MonoBehaviour
 
     private bool gameOver = false;
 
-    // Use this for initialization
-
-    // Update is called once per frame
     void Update()
     {
         if (!gameOver && (PlayerHealth.CurrentHealth <= Mathf.Epsilon))
         {
-            Debug.Log("here");
             StartCoroutine(FadeInCR());
         }
     }

@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class RobotEnemyManager : EnemyManager
 {
-    private ShootInAllDir _AllDirProjectilePattern;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        _AllDirProjectilePattern = GetComponent<ShootInAllDir>();
-    }
-
     private void Start()
     {
         _health.Initialize(10f);
         _damage.Value = 0.25f;
-        _AllDirProjectilePattern.Offset = 15f;
-        _AllDirProjectilePattern.Damage = _damage.Value;
-        _AllDirProjectilePattern.Repeat = true;
-        Invoke("beginPattern", 2f);
+        InitializeStateMachine(new EnemyIdleState(this));
+        Invoke(nameof(RandomShoot), 1f);
     }
-
-    private void beginPattern()
+    void RandomShoot()
     {
-        _AllDirProjectilePattern.begin();
+        var duration = Random.Range(2.75f, 4f);
+        Invoke(nameof(RandomShoot), duration);
+        if (IsPaused) return;
+        SetState(new RobotEnemyShootState(this));
     }
 
 }

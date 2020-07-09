@@ -5,51 +5,51 @@ using UnityEngine.EventSystems;
 public class PlayerMovingState : State
 {
     float _movementSpeed = 10f;
-    Touch _touch;
-    Vector2 _velocity;
-    float previousDistanceToTouchPos;
-    float currentDistanceToTouchPos;
+    float _previousDistance;
+    float _currentDistance;
     PlayerController _playerController;
-    public PlayerMovingState(PlayerController playerController) : base(playerController)
+    Vector3 _positionToMove;
+    public PlayerMovingState(PlayerController playerController, Vector3 positionToMove) : base(playerController)
     {
         _playerController = playerController;
+        _positionToMove = positionToMove;
     }
 
     public override void Start()
     {
-        if (_playerController == null)
-        {
-            _playerController.SetState(new PlayerIdleState(_playerController));
-        }
-        previousDistanceToTouchPos = 0f;
-        currentDistanceToTouchPos = 0f;
+        SetVelocity();
+        _playerController.UpdateMovementDirection();
+        SetPreviousDistanceToTouch();
+        SetCurrentDistanceToTouch();
+        SetAnimatorFlags();
+    }
 
-        _velocity = (_playerController.TouchPosition - _playerController.transform.position).normalized;
-        _velocity *= _movementSpeed;
-        _stateMachine.Rigidbody.velocity = _velocity;
-        SetMovementFlags();
-
+    private void SetVelocity()
+    {
+        var velocity = (_positionToMove - _playerController.transform.position).normalized;
+        velocity *= _movementSpeed;
+        _stateMachine.Rigidbody.velocity = velocity;
     }
 
     public override void Update()
     {
-        if (_playerController.TouchPosition == null)
-        {
-            _playerController.SetState(new PlayerIdleState(_playerController));
-
-        }
         base.Update();
-
-        currentDistanceToTouchPos = Vector3.Distance(_playerController.TouchPosition, _playerController.transform.position);
-        if (currentDistanceToTouchPos > previousDistanceToTouchPos)
+        SetCurrentDistanceToTouch();
+        if (_currentDistance > _previousDistance)
         {
             _playerController.SetState(new PlayerIdleState(_playerController));
-
         }
-        previousDistanceToTouchPos = Vector3.Distance(_playerController.TouchPosition, _playerController.transform.position);
+        SetPreviousDistanceToTouch();
+    }
 
-        SetMovementFlags();
+    private void SetCurrentDistanceToTouch()
+    {
+        _currentDistance = Vector3.Distance(_positionToMove, _playerController.transform.position);
+    }
 
+    private void SetPreviousDistanceToTouch()
+    {
+        _previousDistance = Vector3.Distance(_positionToMove, _playerController.transform.position);
     }
 
     public override void End()
@@ -60,7 +60,7 @@ public class PlayerMovingState : State
         base.End();
     }
 
-    private void SetMovementFlags()
+    private void SetAnimatorFlags()
     {
         if (_stateMachine.Rigidbody.velocity.x > 0f)
         {
