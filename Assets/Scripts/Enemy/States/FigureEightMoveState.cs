@@ -9,7 +9,7 @@ public class FigureEightMoveState : State
         _enemyManager = enemyManager;
     }
     float _speed = 5f;
-    float _xscale = 10f;
+    float _xscale = 5f;
     float _yscale = 5f;
     Vector3 _pivot;
     Vector3 _pivotOffset;

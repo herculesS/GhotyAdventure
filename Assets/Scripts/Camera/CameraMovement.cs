@@ -10,8 +10,19 @@ public class CameraMovement : MonoBehaviour
     private float YComp => Mathf.Clamp(followTarget.position.y, minY, maxY);
     private Vector3 DesiredPosition => new Vector3(XComp, YComp, -10f);
 
+    public bool IsBossFight { get => _isBossFight; set => _isBossFight = value; }
+
+    private bool _isBossFight = false;
+
     void FixedUpdate()
     {
+        if (IsBossFight) return;
         transform.position = Vector3.Lerp(transform.position, DesiredPosition, 5f * Time.deltaTime);
+    }
+
+    public void SetBossFightPosition(Vector3 position)
+    {
+        _isBossFight = true;
+        transform.position = position;
     }
 }

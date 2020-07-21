@@ -30,16 +30,22 @@ public class PlayerController : StateMachine
         _playerDamage = GetComponent<Damage>();
         _takeDamage = GetComponent<TakeDamage>();
         _inputManager = inputManagerObject.GetComponent<InputManager>();
+
     }
     void Start()
     {
         InitializeStateMachine(new PlayerIdleState(this));
         _playerHealth.Initialize(4f);
         _playerDamage.Value = 10f;
+        base.resume();
 
     }
     protected override void Update()
     {
+        if (_state is MoveToTargetPositionState state && state.TargetReached)
+        {
+            SetState(new PlayerIdleState(this));
+        }
         if (ShouldMove)
             SetState(new PlayerMovingState(this, InputManager.GetPointerPosition()));
 
@@ -50,12 +56,15 @@ public class PlayerController : StateMachine
         base.Update();
     }
 
-    private bool ShouldShoot => _currentShootDelay <= 0 && InputManager.IsFireKeyPressed();
-    private bool ShouldMove => InputManager.PointerInputHappened() && !(_state is PlayerShootState);
+    private bool ShouldShoot => _currentShootDelay <= 0 && InputManager.IsFireKeyPressed()
+                                && !(_state is MoveToTargetPositionState);
+    private bool ShouldMove => InputManager.PointerInputHappened()
+                                && !(_state is PlayerShootState || _state is MoveToTargetPositionState);
 
 
     public void Shoot()
     {
+        if (_currentShootDelay > 0) return;
         _currentShootDelay = _shootDelay;
         if (OnPlayerShotEvent != null) OnPlayerShotEvent();
         SetState(new PlayerShootState(this));
@@ -72,6 +81,7 @@ public class PlayerController : StateMachine
         if (other.tag == "Enemy")
             _takeDamage.takeDamage(.25f);
     }
+
     public void UpdateMovementDirection()
     {
         _shootDirection = (Rigidbody.velocity.x >= 0) ? 1f : -1f;

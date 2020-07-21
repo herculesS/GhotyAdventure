@@ -8,8 +8,14 @@ public class EnemyManager : StateMachine
     [SerializeField] private GameObject _projectile;
     protected Health _health;
     protected Damage _damage;
+    private Vector2 _initialPosition;
     public GameObject Projectile { get => _projectile; }
     public Damage Damage { get => _damage; set => _damage = value; }
+
+    public float Speed => speed;
+    public Health Health => _health;
+
+    public Vector2 InitialPosition => _initialPosition;
 
     protected override void Awake()
     {
@@ -18,15 +24,25 @@ public class EnemyManager : StateMachine
         _health.Initialize(1f);
 
         _damage = GetComponent<Damage>();
-        _damage.Value = 0.25f;
+        _damage.Value = 1f;
         InitializeStateMachine(new EnemyIdleState(this));
+
+        _initialPosition = Position;
+        pause();
+
+
+
     }
-    void OnBecameInvisible()
+    protected virtual void OnBecameInvisible()
     {
+
         pause();
     }
-    void OnBecameVisible()
+    protected virtual void OnBecameVisible()
     {
+        Debug.Log("emg" + _resumeVelocity.ToString() + Velocity.ToString());
         resume();
     }
+
+
 }

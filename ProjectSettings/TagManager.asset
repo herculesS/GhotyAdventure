@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Projectile
+  - BossArea
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Entity
   - Enemy
   - Player
-  - 
+  - Cloud
   - 
   - 
   - 
@@ -48,6 +49,9 @@ TagManager:
     locked: 0
   - name: Effect
     uniqueID: 928539655
+    locked: 0
+  - name: Cloud
+    uniqueID: 1233986255
     locked: 0
   - name: Entity
     uniqueID: 1622238689

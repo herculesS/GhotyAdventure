@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour
     protected Rigidbody2D rb;
     private float _damage = 1f;
     public float ProjectileDamage { get => _damage; set => _damage = value; }
-    void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
     }

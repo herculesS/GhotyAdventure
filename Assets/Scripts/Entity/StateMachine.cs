@@ -9,11 +9,13 @@ public abstract class StateMachine : MonoBehaviour
     private Rigidbody2D _rigidbody;
     public Animator Animator { get { return _animator; } }
     public Rigidbody2D Rigidbody { get { return _rigidbody; } }
-    public Vector3 Position => transform.position;
+    public Vector2 Velocity { get => _rigidbody.velocity; set => _rigidbody.velocity = value; }
+    protected Vector2 _resumeVelocity = Vector2.zero;
+    public Vector3 Position { get => transform.position; set => transform.position = value; }
 
     public bool IsPaused { get => _paused; }
 
-    bool _paused = false;
+    bool _paused = true;
 
     protected virtual void Awake()
     {
@@ -51,16 +53,25 @@ public abstract class StateMachine : MonoBehaviour
     protected void pause()
     {
         _paused = true;
+        _resumeVelocity = Velocity;
+        Velocity = Vector2.zero;
     }
 
     protected void resume()
     {
         _paused = false;
+        Velocity = _resumeVelocity;
     }
 
     public float getCurrentAnimationDuration(int layer)
     {
         return Animator.GetCurrentAnimatorStateInfo(layer).length;
     }
+
+    public void GoToPosition(Vector3 position)
+    {
+        SetState(new MoveToTargetPositionState(this, position));
+    }
+
 
 }

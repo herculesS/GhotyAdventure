@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PlayerMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: 5667f9fab223e3858913143f2102ab8b,
+  m_Shader: {fileID: -6465566751694194690, guid: ce34d8efe0e5ab235b8f4e74248063d9,
     type: 3}
   m_ShaderKeywords: ETC1_EXTERNAL_ALPHA
   m_LightmapFlags: 4
@@ -31,3 +31,4 @@ Material:
     m_Floats: []
     m_Colors:
     - _OutlineColor: {r: 0.08927653, g: 0, b: 0.2735849, a: 1}
+    - _outline: {r: 0.016666668, g: 0, b: 0.25, a: 1}

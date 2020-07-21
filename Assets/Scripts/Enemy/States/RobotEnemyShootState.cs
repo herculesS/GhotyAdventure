@@ -4,7 +4,7 @@ using UnityEngine;
 public class RobotEnemyShootState : State
 {
     EnemyManager _enemyManager;
-    int _NumberOfProjectilesPerShot = 10;
+    int _NumberOfProjectilesPerShot = 5;
     public RobotEnemyShootState(EnemyManager enemyManager) : base(enemyManager)
     {
         _enemyManager = enemyManager;

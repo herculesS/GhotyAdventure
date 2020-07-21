@@ -7,8 +7,8 @@ public class RobotEnemyManager : EnemyManager
     private void Start()
     {
         _health.Initialize(10f);
-        _damage.Value = 0.25f;
-        InitializeStateMachine(new EnemyIdleState(this));
+        _damage.Value = 1.25f;
+        InitializeStateMachine(new EnemyStateRandomMove(this));
         Invoke(nameof(RandomShoot), 1f);
     }
     void RandomShoot()

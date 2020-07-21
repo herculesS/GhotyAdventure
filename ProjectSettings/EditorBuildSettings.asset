@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 550d0aaf97892408a974204903115aa6
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/Scenes/SkullPhase.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/BossFightSkull.unity
+    guid: edb039c3e8e89d037a1ef637fa72074b
   m_configObjects: {}
