@@ -75,6 +75,11 @@ public class InputManager : MonoBehaviour
         return Input.GetKeyDown("space");
     }
 
+    public static bool IsEscapeKeyPressed()
+    {
+        return Input.GetKeyDown(KeyCode.Escape);
+    }
+
 
 }
 

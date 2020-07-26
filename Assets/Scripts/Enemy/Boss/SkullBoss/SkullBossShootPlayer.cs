@@ -6,8 +6,8 @@ public class SkullBossShootPlayer : BossState
 {
     Transform _player;
     SkullBossManager _bossManager;
-    private float _shootForSeconds = 1f;
-    private float _delayBetweenShots = 0.4f;
+    private float _shootForSeconds = 2f;
+    private float _delayBetweenShots = 0.3f;
     public SkullBossShootPlayer(EnemyManager enemyManager) : base(enemyManager)
     {
         _bossManager = enemyManager as SkullBossManager;
@@ -60,7 +60,7 @@ public class SkullBossShootPlayer : BossState
     private void InitializeProjectileObject(GameObject obj)
     {
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Speed = 15f;
+        projectile.Speed = 30f;
         projectile.ProjectileDamage = _bossManager.Damage.Value;
         obj.layer = _bossManager.gameObject.layer;
     }

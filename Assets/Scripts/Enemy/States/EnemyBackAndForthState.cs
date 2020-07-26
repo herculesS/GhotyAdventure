@@ -6,7 +6,7 @@ public class EnemyBackAndForthState : State
 {
     EnemyManager _enemyManager;
     Vector3 _initialPosition;
-    bool _IsDirectionReverse = false;
+    bool _IsDirectionReverse = true;
     float XValueOfVelocity => _IsDirectionReverse ? -_enemyManager.Speed : _enemyManager.Speed;
     Vector2 Velocity => new Vector2(XValueOfVelocity, 0);
 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 50161217798833528}
   - component: {fileID: 96067345337346426}
   - component: {fileID: 82986009267485754}
+  - component: {fileID: -5022962352688279538}
   m_Layer: 0
   m_Name: playerprojectile
   m_TagString: Projectile
@@ -75,7 +76,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1622238689
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 73b3996b06cdd42969593841a3124397, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c14d5375ea8b44658410b260d4d7eda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathEffect: {fileID: 1306441569126832, guid: deb0cecfac2714ac1bb9e781820d4267,
+  deathEffect: {fileID: 7899787763919032815, guid: 98549e6637d3de5a5b49b735733776ec,
     type: 3}
 --- !u!58 &58272669455121292
 CircleCollider2D:
@@ -166,7 +167,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1554350404001068}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -196,9 +197,9 @@ TrailRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 15200, guid: 0000000000000000f000000000000000, type: 0}
   m_SortingLayerID: 1622238689
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 1
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -210,6 +211,15 @@ TrailRenderer:
         value: 1
         inSlope: 0
         outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.26546568
+        value: 0.28031856
+        inSlope: -1.2472475
+        outSlope: -1.2472475
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
@@ -228,8 +238,8 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.2605533, g: 0, b: 0.49056602, a: 1}
-      key1: {r: 0.18658073, g: 0.009255955, b: 0.49056602, a: 1}
+      key0: {r: 0.2605533, g: 0, b: 0.49056602, a: 0.61960787}
+      key1: {r: 0, g: 0, b: 0, a: 0}
       key2: {r: 0.18658073, g: 0.009255955, b: 0.49056602, a: 1}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -237,7 +247,7 @@ TrailRenderer:
       key6: {r: 0, g: 0, b: 0, a: 0}
       key7: {r: 0, g: 0, b: 0, a: 0}
       ctime0: 0
-      ctime1: 65535
+      ctime1: 30455
       ctime2: 65535
       ctime3: 0
       ctime4: 0
@@ -253,15 +263,15 @@ TrailRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_NumColorKeys: 2
+      m_NumColorKeys: 3
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
     textureMode: 0
     shadowBias: 0
-    generateLightingData: 0
-  m_MinVertexDistance: 0.1
+    generateLightingData: 1
+  m_MinVertexDistance: 0.00001
   m_Autodestruct: 0
   m_Emitting: 1
 --- !u!82 &82986009267485754
@@ -360,6 +370,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5022962352688279538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1554350404001068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8212d0348a9b67eb273296599d73bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4998133694692794512
 GameObject:
   m_ObjectHideFlags: 0

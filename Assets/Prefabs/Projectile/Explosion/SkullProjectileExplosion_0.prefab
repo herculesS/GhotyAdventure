@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 164473291854700478}
   - component: {fileID: 164473291854700479}
   - component: {fileID: 6981169544237452587}
+  - component: {fileID: 2662250492950820144}
   m_Layer: 0
   m_Name: SkullProjectileExplosion_0
   m_TagString: Untagged
@@ -70,7 +71,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1622238689
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: 9205156237389062752, guid: 39b1fc79d894c5689842a42f664b2739,
     type: 3}
@@ -199,3 +200,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2662250492950820144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 164473291854700476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea8212d0348a9b67eb273296599d73bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

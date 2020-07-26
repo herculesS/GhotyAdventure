@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public static class ExtensionMethods
 {
     public static Vector2 DirectionTowards(this Vector2 a, Vector2 b)
@@ -37,4 +38,30 @@ public static class ExtensionMethods
         return v;
     }
 
+    public static float Rotation(this Vector2 vector)
+    {
+
+        return Mathf.Atan2(vector.y, vector.x) * Mathf.Rad2Deg;
+
+    }
+
+    public static void Hide(this CanvasGroup group)
+    {
+        group.alpha = 0f;
+        group.interactable = false;
+        group.blocksRaycasts = false;
+    }
+    public static void Show(this CanvasGroup group)
+    {
+        group.alpha = 1f;
+        group.interactable = true;
+        group.blocksRaycasts = true;
+    }
+
+    public static bool IsHidden(this CanvasGroup group)
+    {
+        return group.alpha < 1f &&
+        !group.interactable &&
+        !group.blocksRaycasts;
+    }
 }

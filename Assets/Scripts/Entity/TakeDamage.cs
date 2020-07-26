@@ -6,7 +6,7 @@ public class TakeDamage : MonoBehaviour
 {
 
     private Health health;
-    private bool _enabled = true;
+    protected bool _enabled = true;
 
     public bool Enabled { get => _enabled; set => _enabled = value; }
     void Start()
@@ -16,7 +16,8 @@ public class TakeDamage : MonoBehaviour
 
 
     public virtual void takeDamage(float damage)
-    {   if(!_enabled) return;
+    {
+        if (!_enabled) return;
         health.ReduceHealthBy(damage);
     }
 }

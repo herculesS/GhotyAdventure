@@ -5,19 +5,38 @@ using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
+    [SerializeField] AdsManager adsManager;
+    void Awake()
+    {
+        
+        if (SceneManager.GetActiveScene().buildIndex == 0)
+        {
+            if (adsManager != null) ;
+        }
+    }
 
+    void Start()
+    {
+        Time.timeScale = 1f;
+    }
     public void play()
     {
-        SceneManager.LoadScene(1);
+        Load(1);
     }
 
     public void LoadBossFight(int scene)
     {
-        SceneManager.LoadScene(2);
+        Load(2);
     }
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0);
+        Load(0);
+    }
+
+    private void Load(int index)
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene(index);
     }
 }

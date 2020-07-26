@@ -7,8 +7,8 @@ public class SkullBossShootInCircle : BossState
     Transform _player;
     SkullBossManager _bossManager;
     private float _shootForSeconds = 3f;
-    private int _NumberOfProjectilesPerShot = 11;
-    private float _delayBetweenShots = 0.4f;
+    private int _NumberOfProjectilesPerShot = 13;
+    private float _delayBetweenShots = 0.3f;
     public SkullBossShootInCircle(EnemyManager enemyManager) : base(enemyManager)
     {
         _bossManager = enemyManager as SkullBossManager;
@@ -48,7 +48,7 @@ public class SkullBossShootInCircle : BossState
                 var obj = GameObject.Instantiate(_bossManager.Projectile, _bossManager.Position,
                                     Quaternion.Euler(0f, 0f, i * angleIncrement));
                 Projectile projectile = obj.GetComponent<Projectile>();
-                projectile.Speed = 7f;
+                projectile.Speed = 15f;
                 projectile.ProjectileDamage = _bossManager.Damage.Value;
                 obj.layer = _bossManager.gameObject.layer;
             }
@@ -73,7 +73,7 @@ public class SkullBossShootInCircle : BossState
     private void InitializeProjectileObject(GameObject obj)
     {
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Speed = 15f;
+        projectile.Speed = 30f;
         projectile.ProjectileDamage = _bossManager.Damage.Value;
         obj.layer = _bossManager.gameObject.layer;
     }

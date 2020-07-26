@@ -24,7 +24,6 @@ public class BossDashFowardState : BossState
         if (IsDone) return;
         if (!_dashing && _skullBossManager.DistanceToStartPosition() < .5f)
         {
-            Debug.Log("" + _skullBossManager.DistanceToStartPosition());
             IsDone = true;
             _skullBossManager.Velocity = Vector2.zero;
             return;
@@ -37,7 +36,6 @@ public class BossDashFowardState : BossState
         var direction = _skullBossManager.DirectionTowardsStartPosition();
         _skullBossManager.Velocity = direction * _bossManager.Speed;
         _goingBack = true;
-        Debug.Log(direction.x + " " + direction.y);
     }
 
     public override void End()

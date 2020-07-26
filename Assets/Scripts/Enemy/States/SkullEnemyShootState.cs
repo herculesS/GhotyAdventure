@@ -7,7 +7,6 @@ public class SkullEnemyShootState : State
     Transform _player;
     int _numberOfShots = 3;
     float _delayBetweenShots = .2f;
-    bool Paused => _stateMachine.IsPaused;
     public SkullEnemyShootState(EnemyManager enemyManager) : base(enemyManager)
     {
         _enemyManager = enemyManager;
@@ -53,7 +52,7 @@ public class SkullEnemyShootState : State
     private void InitializeProjectileObject(GameObject obj)
     {
         Projectile projectile = obj.GetComponent<Projectile>();
-        projectile.Speed = 50f;
+        projectile.Speed = 30f;
         projectile.ProjectileDamage = _enemyManager.Damage.Value;
         obj.layer = _enemyManager.gameObject.layer;
     }

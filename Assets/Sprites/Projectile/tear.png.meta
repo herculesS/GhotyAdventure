@@ -5,6 +5,9 @@ TextureImporter:
   - first:
       213: -2305958526138685017
     second: tear_0
+  - first:
+      213: 8483901974124552466
+    second: tear_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -105,10 +108,10 @@ TextureImporter:
       name: tear_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 29
-        width: 83
-        height: 51
+        x: 29
+        y: 17
+        width: 51
+        height: 83
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -116,8 +119,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a968be10f69fffd0800000000000000
-      internalID: -2305958526138685017
+      spriteID: 211ede455efdcb570800000000000000
+      internalID: 8483901974124552466
       vertices: []
       indices: 
       edges: []

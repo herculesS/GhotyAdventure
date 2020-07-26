@@ -60,7 +60,6 @@ public class SkullBossManager : EnemyManager
 
             _audioSource.Play();
             var index = Random.Range(0, stateList.Count);
-            Debug.Log(stateList.Count.ToString());
             SetState(stateList[index]);
             var shootWaitTime = Random.Range(5f, 7f);
             yield return new WaitForSeconds(shootWaitTime);

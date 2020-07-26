@@ -40,7 +40,6 @@ public class EnemyManager : StateMachine
     }
     protected virtual void OnBecameVisible()
     {
-        Debug.Log("emg" + _resumeVelocity.ToString() + Velocity.ToString());
         resume();
     }
 

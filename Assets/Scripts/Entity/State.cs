@@ -4,6 +4,7 @@ using UnityEngine;
 public abstract class State
 {
     protected StateMachine _stateMachine;
+    protected bool Paused => _stateMachine.IsPaused;
     protected State(StateMachine stateMachine)
     {
         _stateMachine = stateMachine;
